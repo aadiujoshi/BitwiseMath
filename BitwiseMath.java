@@ -1,7 +1,7 @@
 public class BitwiseMath
 {
     public static void main(String args[]){
-        System.out.println(add(1, 1));
+        System.out.println("answer =  " + add(2, 2));
     }
 
     public static int add(int a, int b){
@@ -28,7 +28,7 @@ public class BitwiseMath
             // System.out.println(n);
 
             //carry
-            n = (byte)((carry << ~(a1 & a2)) | n);
+            n = (byte)((carry << (~(a1 & a2)) & 1) | n);
 
             // System.out.println(n);
 
@@ -36,9 +36,10 @@ public class BitwiseMath
             carry = (byte)(a1 & a2);
 
             //add to final
-            System.out.println(n | mask);
+            // System.out.println(mask << (a1 & a2));
 
-            f = (f | (n | (mask)));
+            f = (f | (n | (mask << (a1 & a2))));
+            System.out.println(a1 + "  " + a2 + "  " + f);
         }
 
         return f;
