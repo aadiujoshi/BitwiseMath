@@ -29,17 +29,17 @@ public class BitwiseMath
             n = (int)((carry << (~(a1 & a2)) & 1) | n);
 
             //match place value
-            while(n < (mask << (a1 & a2)) && n != 0){ n <<= 1; }
+            while(n <= (mask << (a1 & a2)) && n != 0){ n <<= 1; }
             
             // System.out.println(a1 + "  " + a2);
-            System.out.println(Integer.toBinaryString(f | n));
             
             //merge with final
             f |= n; 
 
             //calculate next carry
             carry = (a1 & a2) | (a1 & carry) | (a2 & carry);
-            System.out.println(a1 + "  " + a2 + "  " + carry);
+            // System.out.println(a1 + "  " + a2 + "  " + carry);
+            // System.out.println(Integer.toBinaryString(f));
         }
         System.out.println();
         //if extra carry
