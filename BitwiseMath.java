@@ -2,10 +2,12 @@ public class BitwiseMath
 {
     public static void main(String args[]){
         // System.out.println("answer   " + add((int)(Math.pow(2, 16)), (int)(Math.pow(2, 10))));
-        int a = 2222;
-        int b = 2898;
+        int a = 2;
+        int b = 3;
         System.out.println("answer = " + add(a, b));
         System.out.println("correct answer = " + (a + b));
+        // System.out.println("answer = " + mult(a, b));
+        // System.out.println("correct answer = " + (a * b));
     }
 
     public static int add(int a, int b){
@@ -33,6 +35,17 @@ public class BitwiseMath
 
             //calculate next carry
             carry = (int)(a1 & a2);
+        }
+
+        return f;
+    }
+
+    public static int mult(int a, int b){
+
+        int f = 0;
+        for(int iter = 0; iter < b; iter = add(iter, 1)){
+            f = add(f, a);
+            System.out.println(f);
         }
 
         return f;
