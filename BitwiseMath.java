@@ -2,7 +2,7 @@ public class BitwiseMath
 {
     public static void main(String args[]){
         // System.out.println("answer   " + add((int)(Math.pow(2, 16)), (int)(Math.pow(2, 10))));
-        int a = 2;
+        int a = 1;
         int b = 3;
         System.out.println("answer = " + add(a, b));
         System.out.println("correct answer = " + (a + b));
@@ -13,7 +13,8 @@ public class BitwiseMath
     public static int add(int a, int b){
         int carry = 0;
         int f = 0;
-        for(int mask = 1; mask <= ((a > b) ? a : b); mask <<= 1){
+        int mask;
+        for(mask = 1; mask <= ((a > b) ? a : b); mask <<= 1){
             int a1 = (int)((mask & a));
             int a2 = (int)((mask & b));
 
@@ -29,16 +30,28 @@ public class BitwiseMath
 
             //match place value
             while(n < (mask << (a1 & a2)) && n != 0){ n <<= 1; }
-
+            
+            // System.out.println(a1 + "  " + a2);
+            System.out.println(Integer.toBinaryString(f | n));
+            
             //merge with final
             f |= n; 
 
             //calculate next carry
-            carry = (int)(a1 & a2);
+            carry = (a1 & a2) | (a1 & carry) | (a2 & carry);
+            System.out.println(a1 + "  " + a2 + "  " + carry);
         }
-
+        System.out.println();
+        //if extra carry
+        while(carry < mask && carry != 0){ 
+            carry <<= 1;
+            System.out.println(carry);
+        }
+        f |= carry;
+    
         return f;
     }
+    
 
     public static int mult(int a, int b){
 
